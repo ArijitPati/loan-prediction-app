@@ -5,17 +5,19 @@ import os
 
 app = Flask(__name__)
 
+
 # ================================
-#  LOAD MODEL SAFELY
+#  LOAD MODEL SAFELY FOR RENDER
 # ================================
-MODEL_PATH = r"D:\PROJECT\loan-prediction-app\credit_risk_model.pkl"
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
 
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
     print("✅ Model Loaded Successfully")
 else:
-    print("❌ Model file NOT found!")
+    print("❌ Model file NOT found at:", MODEL_PATH)
     model = None
+
 
 
 #  HOME PAGE
@@ -115,3 +117,4 @@ def predict():
 # ================================
 if __name__ == "__main__":
     app.run(debug=True)
+
